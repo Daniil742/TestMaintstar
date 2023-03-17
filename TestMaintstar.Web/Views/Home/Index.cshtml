@@ -1,0 +1,51 @@
+﻿@model List<Picture>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            @foreach (var item in Model)
+            {
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-9">
+                                <a href="@Url.Action("Detail", "Home", item)" data-ajax="true" data-ajax-method="get" data-ajax-update="#panel" data-ajax-mode='replace' data-ajax-url="@Url.Action("Detail","Home", item)"><b>@item.Name</b></a>
+                            </div>
+                            <div class="col-3">
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Еще
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="@Url.Action("Edit", "Home", new { id = item.Id })">Редактировать</a></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("Delete", "Home", new { id = item.Id })">Удалить</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p>@item.PublicationDate</p>
+                                @if (item.Image is not null)
+                                {
+                                    <img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Image))" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="panel" class="col-9 border border-dark">
+            <p>Я блок</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Action("Create", "Home")'">Добавить изображение</button>
+        </div>
+    </div>
+</div>

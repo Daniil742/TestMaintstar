@@ -1,0 +1,16 @@
+﻿@model Picture
+
+<form asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Id">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label for="Name">Заголовок</label>
+        <input type="text" class="form-control" id="Name" aria-describedby="emailHelp" asp-for="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Description">Краткое описание</label>
+        <input type="text" class="form-control" id="Description" asp-for="Description">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
